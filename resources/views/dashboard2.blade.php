@@ -29,7 +29,35 @@
 <script>
     Dropzone.autoDiscover = false;
 	
-    
+    //get total quote
+    let promise1 = fetch('http://localhost/lav8invplane/api/total/quotation')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        tot = data.Totalquotation;
+        $('span.draft').text(tot.draft);
+        $('span.sent').text(tot.sent);
+        $('span.view').text(tot.view);
+        $('span.approve').text(tot.approve);
+        $('span.reject').text(tot.reject);
+        $('span.cancel').text(tot.cancel);
+        
+    });
+
+    //get total quote
+    let promise2 = fetch('http://localhost/lav8invplane/api/total/invoice')
+    .then(response => response.json())
+    .then(data => {
+        tot = data.Totalinvoice;
+        $('span.draft').text(tot.draft);
+        $('span.sent').text(tot.sent);
+        $('span.view').text(tot.view);
+        $('span.approve').text(tot.approve);
+        $('span.reject').text(tot.reject);
+        $('span.cancel').text(tot.cancel);
+        //console.log(data)
+    });
+
     $(function () {
         $('.nav-tabs').tab();
         $('.tip').tooltip();
@@ -148,34 +176,31 @@
                     <span class="pull-right text-muted">This Month</span>
                 </div>
 
-				<?php 
-				dump($quotationOverview);
-				?>
 				<table class="table table-hover table-bordered table-condensed no-margin">
                         <tr>
                             
 							<td><a href="https://demo.invoiceplane.com/quotes/status/draft">Draft</a></td>
-                            <td class="amount"><span class="draft">Rp. {{fcur($quotationOverview['draft'])}}</span></td>
+                            <td class="amount"><span class="draft">Rp. {{fcur(0)}}</span></td>
                         </tr>
                         <tr>
                             <td><a href="https://demo.invoiceplane.com/quotes/status/sent">Sent</a></td>
-                            <td class="amount"><span class="sent">Rp. {{fcur($quotationOverview['sent'])}}</span></td>
+                            <td class="amount"><span class="sent">Rp. {{fcur(0)}}</span></td>
                         </tr>
                         <tr>
                             <td><a href="https://demo.invoiceplane.com/quotes/status/viewed">Viewed</a></td>
-                            <td class="amount"><span class="viewed">Rp. {{fcur($quotationOverview['viewed'])}}</td>
+                            <td class="amount"><span class="viewed">Rp. {{fcur(0)}}</td>
                         </tr>
                         <tr>
                             <td><a href="https://demo.invoiceplane.com/quotes/status/approved">Approved</a></td>
-                            <td class="amount"><span class="approved">Rp. {{fcur($quotationOverview['approved'])}}</span></td>
+                            <td class="amount"><span class="approved">Rp. {{fcur(0)}}</span></td>
                         </tr>
                         <tr>
                             <td><a href="https://demo.invoiceplane.com/quotes/status/rejected">Rejected</a></td>
-                            <td class="amount"><span class="rejected">Rp. {{fcur($quotationOverview['rejected'])}}</span></td>
+                            <td class="amount"><span class="rejected">Rp. {{fcur(0)}}</span></td>
                         </tr>
                         <tr>
                             <td><a href="https://demo.invoiceplane.com/quotes/status/canceled">Canceled</a></td>
-                            <td class="amount"><span class="canceled">Rp. {{fcur($quotationOverview['cancel'])}})</span></td>
+                            <td class="amount"><span class="canceled">Rp. {{0}}</span></td>
                         </tr>
                     </table>
             </div>

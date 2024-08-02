@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//API route
+include('api.php');
+
+
+
 //app
 Route::any('/', 'App\Http\Controllers\AppController@dashboard');
 Route::get('/dashboard', 'App\Http\Controllers\AppController@dashboard');

@@ -12,6 +12,20 @@ use App\Http\Model\Client;
 
 class ApiController extends Controller {
 	
+	//api get total quotation dan invoice
+	public function getTotal($jr, $date='') {
+		//return "get Total $jr";
+		$db=$jr;
+		$out['Total'.$jr] = [
+			'draft'		=> DB::table($db)->where('Status', 0)->sum('Total')?? 0,
+			'sent'		=> DB::table($db)->where('Status', 1)->sum('Total')?? 0,
+			'viewed'	=> DB::table($db)->where('Status', 2)->sum('Total')?? 0,
+			'approved'	=> DB::table($db)->where('Status', 3)->sum('Total')?? 0,
+			'rejected'	=> DB::table($db)->where('Status', 4)->sum('Total')?? 0,
+			'cancel'	=> DB::table($db)->where('Status', 5)->sum('Total')?? 0,
+		];
+		return response()->json($out);
+	}
 	// api tuk get data
 	function getdata($jr, $id='', Request $req) {
 		$limit = $req->limit ?? 999999;

@@ -17,6 +17,9 @@ use App\Post;
 
 Route::prefix('api')->group(function() {
     
+    //for Dashboard
+    Route::get('total/{jr}', 'App\Http\Controllers\ApiController@getTotal');
+    
     // general create
     Route::post('customer/create', 'ApiController@createdata');
     Route::post('customer/update/{id}', 'ApiController@updatedata');

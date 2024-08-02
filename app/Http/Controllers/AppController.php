@@ -70,22 +70,22 @@ class AppController extends Controller
     // ];
     $data = [];
 
-    $data['quotationOverview'] = [
-        'draft' => DB::table('quotation')->where('Status', 0)->sum('Total'),  //123456789,
-        'sent' => DB::table('quotation')->where('Status', 1)->sum('Total'), //123456789,
-        'viewed' => DB::table('quotation')->where('Status', 2)->sum('Total'), //123456789,
-        'approved' => DB::table('quotation')->where('Status', 3)->sum('Total'), //123456789,
-        'rejected' => DB::table('quotation')->where('Status', 4)->sum('Total'), //123456789,
-        'cancel' => DB::table('quotation')->where('Status', 5)->sum('Total'), //123456789,
-    ];
-    $data['invoiceOverview'] = [DB::table('quotation')->where('Status', 0)->sum('Total'),
-        'draft' => DB::table('invoice')->where('Status', 0)->sum('Total'), //123456789,
-        'sent' => DB::table('invoice')->where('Status', 1)->sum('Total'), //123456789,
-        'viewed' => DB::table('invoice')->where('Status', 2)->sum('Total'), //123456789,
-        'approved' => DB::table('invoice')->where('Status', 3)->sum('Total'), //123456789,
-        'rejected' => DB::table('invoice')->where('Status', 4)->sum('Total'), //123456789,
-        'cancel' => DB::table('invoice')->where('Status', 5)->sum('Total'), //123456789,
-    ];
+    // $data['quotationOverview'] = [
+    //     'draft' => DB::table('quotation')->where('Status', 0)->sum('Total'),  //123456789,
+    //     'sent' => DB::table('quotation')->where('Status', 1)->sum('Total'), //123456789,
+    //     'viewed' => DB::table('quotation')->where('Status', 2)->sum('Total'), //123456789,
+    //     'approved' => DB::table('quotation')->where('Status', 3)->sum('Total'), //123456789,
+    //     'rejected' => DB::table('quotation')->where('Status', 4)->sum('Total'), //123456789,
+    //     'cancel' => DB::table('quotation')->where('Status', 5)->sum('Total'), //123456789,
+    // ];
+    // $data['invoiceOverview'] = [DB::table('quotation')->where('Status', 0)->sum('Total'),
+    //     'draft' => DB::table('invoice')->where('Status', 0)->sum('Total'), //123456789,
+    //     'sent' => DB::table('invoice')->where('Status', 1)->sum('Total'), //123456789,
+    //     'viewed' => DB::table('invoice')->where('Status', 2)->sum('Total'), //123456789,
+    //     'approved' => DB::table('invoice')->where('Status', 3)->sum('Total'), //123456789,
+    //     'rejected' => DB::table('invoice')->where('Status', 4)->sum('Total'), //123456789,
+    //     'cancel' => DB::table('invoice')->where('Status', 5)->sum('Total'), //123456789,
+    // ];
 
     $data['quotation'] = DB::table('quotation')->leftJoin('masterstatus','quotation.Status','=','masterstatus.id')->orderBy('TransDate','DESC')->take($limit)->get();
     $data['invoice'] = DB::table('invoice')->leftJoin('masterstatus','invoice.Status','=','masterstatus.id')->orderBy('TransDate','DESC')->take($limit)->get();
